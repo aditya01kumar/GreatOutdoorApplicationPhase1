@@ -1,0 +1,200 @@
+create table Address(
+  addressId INT NOT NULL,
+  buildingNo VARCHAR(50) NOT NULL,
+  streetName VARCHAR(40) NOT NULL,
+  area VARCHAR(40) NOT NULL,
+  city VARCHAR(20) NOT NULL,
+  state VARCHAR(20) NOT NULL,
+  zip VARCHAR(10) NOT NULL,
+   PRIMARY KEY ( addressID )
+);
+
+
+INSERT INTO ADDRESS (addressId, buildingNo, streetName, area, city, state, zip)
+VALUES ('01', '123', 'Denver Street', 'Alpha 2', 'Noida', 'UP' , '201308');
+
+
+-------------------------------------------------------------------------------------------------
+
+create table Customer(
+  customerID INT NOT NULL,
+  customerName VARCHAR(50) NOT NULL,
+  mobileNo INT NOT NULL,
+  email VARCHAR(50) NOT NULL,
+  address VARCHAR(20)  CONSTRAINT Customer_addressID_fk REFERENCES Address(addressID)  NOT NULL,
+  role VARCHAR(20) NOT NULL,
+   PRIMARY KEY ( customerID )
+);
+
+INSERT INTO CUSTOMER (customerID, customerName, mobileNo, email, address, role)
+VALUES ('01', 'Anuj', '999999999', 'abc@gmail.com', '123 alpha 2', 'Retailer');
+
+
+--------------------------------------------------------------------------------------------------
+
+create table GrowthReport(
+  growthReportId INT NOT NULL,
+  currentDate DATE NOT NULL,
+  revenue INT NOT NULL,
+  amountChange DOUBLE NOT NULL,
+  percentgeGrowth DOUBLE NOT NULL,
+  colourCode DOUBLE NOT NULL,
+   PRIMARY KEY ( growthReportID )
+);
+
+INSERT INTO GROWTH_REPORT (growthReportID, currentDate, revenue, amountChange, percentgeGrowth, colourCode)
+VALUES ('01', '23/04/21', '256', '856.4', '18', '22333');
+
+
+--------------------------------------------------------------------------------------------------------
+
+create table Product(
+  productId INT NOT NULL,
+  productName INT NOT NULL,
+  price DOUBLE NOT NULL,
+  image VARCHAR(50) NOT NULL,
+  color VARCHAR(50) NOT NULL,
+  category VARCHAR(50) NOT NULL,
+  quantity INT NOT NULL,
+  manufacturer VARCHAR(50) NOT NULL,
+  specification VARCHAR(50) NOT NULL,
+   PRIMARY KEY ( productID )
+);
+
+INSERT INTO ProductEntity (productID, productName, price, image, color, category, quantity, manufacturer, specification)
+VALUES ('01', '123', '50', 'cookies', 'red', 'grocery' , '2' , 'Rakesh Kumar' , 'Sweet');
+
+
+-----------------------------------------------------------------------------------------------------------
+
+
+create table SalesReport(
+  productId VARCHAR(50) NOT NULL CONSTRAINT ProductEntity_productID_fk REFERENCES ProductEntity(prductID),
+  productName VARCHAR(50) NOT NULL  CONSTRAINT ProductEntity_productName_fk REFERENCES ProductEntity(productName),
+  quantitySold INT NOT NULL,
+  totalSale DOUBLE NOT NULL,
+  
+   PRIMARY KEY ( productID )
+);
+
+INSERT INTO SalesReportEntity (productID, productName, quantitySold, totalSale)
+VALUES ('101', 'Noodles', '50', '75');
+
+------------------------------------------------------------------------------------------------------------
+
+
+create table Userdata(
+  userName VARCHAR(50) NOT NULL,
+  userId INT NOT NULL,
+  usertype VARCHAR(50) NOT NULL,
+  userpassword VARCHAR (50) NOT NULL,
+  
+   PRIMARY KEY ( userId )
+);
+
+INSERT INTO Userdata (userName, userID, userType, userPassword)
+VALUES ('Ravi', '112', 'Regualar', '12345');
+
+
+----------------------------------------------------------------------------------------------------------
+
+
+create table WishlistItemEntity(
+  wishlistId BIGINT NOT NULL,
+  userId VARCHAR(50) NOT NULL CONSTRAINT Userdata_userID_fk REFERENCES Userdata(userID),
+  productId VARCHAR(20),
+
+   PRIMARY KEY ( wishlistId, userId )
+);
+
+INSERT INTO WishlistItemEntity (wishlistId , userId, productId)
+VALUES ('502', '112','12345');
+
+
+----------------------------------------------------------------------------------------------------------
+
+
+create table CartItemEntity (
+  cartId BIGINT NOT NULL,
+  userId VARCHAR(50) NOT NULL CONSTRAINT Userdata_userID_fk REFERENCES Userdata(userID),
+  cartTotalPrice DOUBLE NOT NULL,
+  totalQuantity BIGINT NOT NULL,
+
+  PRIMARY KEY ( userId )
+);
+
+
+INSERT INTO GROWTH_REPORT (growthReportID, currentDate, revenue, amountChange, percentgeGrowth, colourCode)
+VALUES ('01', '23/04/21', '256', '856.4', '18', '22333');
+
+
+--------------------------------------------------------------------------------------------------------
+
+create table ProductEntity(
+  productId INT NOT NULL,
+  productName INT NOT NULL,
+  price DOUBLE NOT NULL,
+  image VARCHAR(50) NOT NULL,
+  color VARCHAR(50) NOT NULL,
+  category VARCHAR(50) NOT NULL,
+  quantity INT NOT NULL,
+  manufacturer VARCHAR(50) NOT NULL,
+  specification VARCHAR(50) NOT NULL,
+   PRIMARY KEY ( productID )
+);
+
+INSERT INTO ProductEntity (productID, productName, price, image, color, category, quantity, manufacturer, specification)
+VALUES ('01', '123', '50', 'cookies', 'red', 'grocery' , '2' , 'Rakesh Kumar' , 'Sweet');
+
+
+-----------------------------------------------------------------------------------------------------------
+
+
+create table SalesReportEntity(
+  productId VARCHAR(50) NOT NULL,
+  productName VARCHAR(50) NOT NULL,
+  quantitySold INT NOT NULL,
+  totalSale DOUBLE NOT NULL,
+  
+   PRIMARY KEY ( productID )
+);
+
+INSERT INTO SalesReportEntity (productID, productName, quantitySold, totalSale)
+VALUES ('101', 'Noodles', '50', '75');
+
+------------------------------------------------------------------------------------------------------------
+
+
+create table Userdata(
+  userName VARCHAR(50) NOT NULL,
+  userId INT NOT NULL,
+  usertype VARCHAR(50) NOT NULL,
+  userpassword VARCHAR (50) NOT NULL,
+  
+   PRIMARY KEY ( userId )
+);
+
+INSERT INTO Userdata (userName, userID, userType, userPassword)
+VALUES ('Ravi', '112', 'Regualar', '12345');
+
+
+----------------------------------------------------------------------------------------------------------
+
+
+create table WishlistItemEntity(
+  wishlistId BIGINT NOT NULL,
+  userId VARCHAR(50) NOT NULL,
+  productId VARCHAR(20),
+
+   PRIMARY KEY ( wishlistId)
+);
+
+INSERT INTO WishlistItemEntity (wishlistId , userId, productId)
+VALUES ('502', '112','12345');
+
+
+----------------------------------------------------------------------------------------------------------
+
+
+
+
